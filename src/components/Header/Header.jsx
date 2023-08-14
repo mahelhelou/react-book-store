@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
+
 import './Header.css'
+import CartContext from '../../context/CartContext'
 
 const Header = () => {
 	const [toggle, setToggle] = useState(false)
+	const { cartItemsLength } = useContext(CartContext)
 
 	return (
 		<div className='header'>
@@ -14,43 +18,44 @@ const Header = () => {
 					<i className='bi bi-telephone'></i> 123-456-789
 				</div>
 				<div className='header-top-text'>Welcome to Book Store</div>
-				<div className='header-top-a'>
+				<Link to='/login' className='header-top-link'>
 					<i className='bi bi-person-fill'></i> Login
-				</div>
+				</Link>
 			</div>
 
 			<div className='header-middle'>
-				<a href='/' className='header-middle-logo'>
+				<Link to='/' className='header-middle-logo'>
 					<b>Book</b>
 					<i className='bi bi-book'></i>
 					<b>Store</b>
-				</a>
+				</Link>
 				<div className='header-middle-search-box'>
 					<input className='header-middle-search-input' type='search' placeholder='Search in book store...' />
 					<i className='bi bi-search'></i>
 				</div>
-				<div className='header-middle-cart-wrapper'>
+				<Link to='/cart' className='header-middle-cart-wrapper'>
+					{cartItemsLength && <b className='cart-notification'>{cartItemsLength}</b>}
 					<i className='bi bi-cart2'></i>
-				</div>
+				</Link>
 			</div>
 
 			<nav style={{ left: toggle && '0' }} className='navbar'>
 				<ul className='navbar-links'>
-					<li onClick={() => setToggle(false)} className='navbar-li'>
+					<Link to='/' className='navbar-link' onClick={() => setToggle(false)}>
 						Home
-					</li>
-					<li onClick={() => setToggle(false)} className='navbar-li'>
+					</Link>
+					<Link to='/authors' className='navbar-link' onClick={() => setToggle(false)}>
 						Authors
-					</li>
-					<li onClick={() => setToggle(false)} className='navbar-li'>
+					</Link>
+					<Link to='/about' className='navbar-link' onClick={() => setToggle(false)}>
 						About Us
-					</li>
-					<li onClick={() => setToggle(false)} className='navbar-li'>
+					</Link>
+					<Link to='/contact' className='navbar-link' onClick={() => setToggle(false)}>
 						Contact Us
-					</li>
-					<li onClick={() => setToggle(false)} className='navbar-li'>
+					</Link>
+					<Link to='/register' className='navbar-link' onClick={() => setToggle(false)}>
 						Register
-					</li>
+					</Link>
 				</ul>
 			</nav>
 		</div>
