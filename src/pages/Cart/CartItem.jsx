@@ -20,7 +20,7 @@ const CartItem = ({ item, addToCart, removeFromCart }) => {
 						<i
 							className='bi bi-dash-lg'
 							onClick={() => {
-								if (item.quantity > 0) {
+								if (item.quantity > 1) {
 									addToCart({ ...item, quantity: item.quantity - 1 })
 								}
 							}}
